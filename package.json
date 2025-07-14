@@ -1,0 +1,25 @@
+{
+  "name": "pw_steps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:stage": "cross-env ENV=stage npx playwright test",
+    "test:dev": "cross-env ENV=stage npx playwright test",
+    "post:test": " ts-node support/utils/generate-log-index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.53.2",
+    "@types/node": "^24.0.8",
+    "cross-env": "^7.0.3",
+    "dotenv": "^17.0.0"
+  },
+  "dependencies": {
+    "fs-extra": "^11.3.0",
+    "ts-node": "^10.9.2"
+  }
+}
