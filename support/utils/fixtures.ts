@@ -9,7 +9,6 @@ interface CustomOptions {
 }
 interface CustomFixtures {
     loginSteps: LoginSteps;
-    initializeLogger: Logger;
     forEachTest: void;
 }
 
@@ -34,10 +33,6 @@ export const test = base.extend<CustomFixtures, CustomOptions>({
 
         await use(loginSteps);
     },
-
-
-
-
 })
 
 export { expect } from "@playwright/test"
