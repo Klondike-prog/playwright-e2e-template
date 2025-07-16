@@ -4,9 +4,7 @@ import { test } from "../support/utils/fixtures";
 
 const user = generateRegisterUser()
 test.use({
-  storageState: { cookies: [], origins: [] },
-  // email: user.email,
-  // password: process.env.password
+  storageState: { cookies: [], origins: [] }
 })
 
 test.describe('Login tests', () => {
@@ -17,7 +15,6 @@ test.describe('Login tests', () => {
 
   test(`Login with User via UI`, async ({ loginSteps }) => {
     await loginSteps.performLogin(user.email, process.env.password)
- 
   });
 
 });
