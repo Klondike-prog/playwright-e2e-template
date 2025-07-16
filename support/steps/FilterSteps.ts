@@ -15,10 +15,12 @@ export default class FilterComponentSteps {
     async filterItemsByCategory(category: string) {
         await test.step('Load Home Page', async () => {
             await this.homePage.checkLoggedInState('John', 'Doe')
+            Logger.onPage('HomePage')
         });
         await test.step(`Filter items by category: ${category}`, async () => {
-             Logger.time(`Filter items by categroy: ${category}`)
+            Logger.time(`Filter items by categroy: ${category}`)
             await this.homePage.filterItemsByCategory(category)
+            Logger.passed(`Category: ${category} passed.`)
         });
     };
 }

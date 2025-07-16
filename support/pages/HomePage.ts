@@ -21,7 +21,6 @@ export class HomePage extends BasePage {
     }
     async checkLoggedInState(firstName: string, lastName: string) {
         await this.load();
-        Logger.onPage('HomePage')
         await this.assertMenu(firstName, lastName)
         Logger.passed(`Check Logged In state for user: ${firstName} ${lastName}`)
     };

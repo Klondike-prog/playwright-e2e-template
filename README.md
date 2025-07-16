@@ -6,8 +6,8 @@
 
 ## Scope
 
-The scope of the project represents a template for playwright E2E Tests using TypeScript. All tests are performed on a mock website called [practicesoftwaretesting](https://practicesoftwaretesting.com) 
-The template is set for multiple environments stage and dev, but you can add as many envs as you wish.
+The scope of the project represents a template for playwright E2E Tests using TypeScript based off POM (Page Object Model). All tests are performed on a mock website called [practicesoftwaretesting](https://practicesoftwaretesting.com) 
+The template is set for multiple environments (stage and dev), but you can add as many envs as you wish.
 
 
 ## Installation
@@ -28,6 +28,13 @@ You can optionally install only selected browsers, see [install browsers](https:
 ```Shell
 # install package.json dependencies
 npm install
+```
+## Set secrets environment variables
+```Shell
+# Create a secrets.env file in configs/ 
+# set password=yourPassword inside the file, in order to run the current test suite, otherwise tests will fail.
+configs/secrets.env/
+password=yourPassword
 ```
 
 ## Run Tests
