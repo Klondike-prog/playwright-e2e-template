@@ -2,6 +2,10 @@
 import { test as base, type TestInfo } from "@playwright/test"
 import LoginSteps from "../steps/LoginSteps";
 import Logger from "./logger";
+import FilterComponentSteps from "../steps/FilterSteps";
+import RegisterUserApiSteps from "../steps/RegisterUserApiSteps";
+import { HomePage } from "../pages/HomePage";
+
 
 interface CustomOptions {
     email: string;
@@ -9,6 +13,9 @@ interface CustomOptions {
 }
 interface CustomFixtures {
     loginSteps: LoginSteps;
+    filterComponentSteps: FilterComponentSteps;
+    registerUserApiSteps: RegisterUserApiSteps
+    homePage: HomePage
     forEachTest: void;
 }
 
@@ -22,17 +29,28 @@ export const test = base.extend<CustomFixtures, CustomOptions>({
             testInfo.workerIndex,
             testInfo.file
         );
+        Logger.testStart(testInfo.title)
         await use();
     }, { scope: 'test', auto: true }],
 
     //Step IMPORTS
-    loginSteps: async ({ page, email, password }, use) => {
+    loginSteps: async ({ page }, use) => {
 
-        const loginSteps = new LoginSteps(page);
-        await loginSteps.performLogin(email, password)
-
-        await use(loginSteps);
+        // const loginSteps = new LoginSteps(page);
+        // await loginSteps.performLogin(email, password)
+        await use(new LoginSteps(page));
     },
+    homePage: async ({ page }, use) => {
+        await use(new HomePage(page));
+    },
+    filterComponentSteps: async ({ page }, use) => {
+        await use(new FilterComponentSteps(page));
+    },
+    registerUserApiSteps: async ({ }, use) => {
+        await use(new RegisterUserApiSteps());
+    },
+
+
 })
 
 export { expect } from "@playwright/test"

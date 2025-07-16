@@ -1,4 +1,4 @@
-import { Locator, Page, test } from '@playwright/test';
+import { expect, Locator, Page, test } from '@playwright/test';
 import { BasePage } from './BasePage';
 import Logger from '../utils/logger';
 
@@ -15,7 +15,7 @@ export class LoginPage extends BasePage {
     }
 
     async load() {
-        await this.loadEndpoint('/auth/login')
+        await this.page.goto(`${process.env.baseURL}/auth/login`)
     }
     async loadEndpoint(endpoint: string) {
         const fullURL = `${process.env.baseURL}${endpoint}`;
@@ -38,6 +38,11 @@ export class LoginPage extends BasePage {
         await this.fillEmail(email);
         await this.fillPassword(password);
         await this.submitLogin();
-     
+        await this.assertUserMenu()
+
+    }
+    async assertUserMenu() {
+        await expect(this.header.userMenu).toBeVisible()
+        await expect(this.header.userMenu).toContainText('John Doe')
     }
 }

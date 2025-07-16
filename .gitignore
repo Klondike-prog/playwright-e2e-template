@@ -7,6 +7,6 @@ test-results-stage/
 test-results/
 reporters/
 logs/
-configs/
-.auth/
+configs/secrets.env
+.auth/stage_state.json
 

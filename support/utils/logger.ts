@@ -19,9 +19,7 @@ export default class Logger {
     // Create logs directory per spec
     const logDir = path.resolve(__dirname, `../logs/${specFileName}`);
     if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
-
     this.logFilePath = path.join(logDir, `log-${workerId}-${sanitizedTestName}.txt`);
-    fs.writeFileSync(this.logFilePath, `=== Test: ${testName} ===\n\n`);
   }
 
   private static log(message: string) {

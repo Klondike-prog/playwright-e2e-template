@@ -3,6 +3,9 @@ import './envLoader';
 import fs from 'fs-extra';
 import path from 'path';
 import { LoginPage } from '../pages/LoginPage';
+import { getApiContext } from './apiHelper';
+import { generateRegisterUser } from '../../test-data/generateRegisterUser.data';
+import { registerUserApi } from '../api/registerUser.api';
 
 console.log('\n   Global setup starting...\n');
 
@@ -29,7 +32,12 @@ export default async () => {
 
   console.log('\n ✓ Global setup completed\n');
 
-  const browser: Browser = await chromium.launch({ headless: false });
+  const apiContext = await getApiContext();
+  const user = generateRegisterUser()
+  await registerUserApi(apiContext, user);
+  console.log(`\n✓ Register new user for future logins: ${user.email}\n`)
+
+  const browser: Browser = await chromium.launch(); //{ headless: false }
 
   const context: BrowserContext = await browser.newContext({
     ignoreHTTPSErrors: true,
@@ -40,12 +48,14 @@ export default async () => {
   const loginPage = new LoginPage(page);
   await loginPage.load();
 
-  await loginPage.fillAndSubmitLogin(process.env.email, process.env.password);
+  await loginPage.fillAndSubmitLogin(user.email, process.env.password);
+  console.log(`\n✓ Create Login state for user: ${user.email}\n`)
+
 
   await page.waitForTimeout(2000);
 
   await context.storageState({ path: `./.auth/${process.env.ENV}_state.json` });
-  console.log(`\n ✓ Generated state: ./.auth/${process.env.ENV}_state.json\n`);
+  console.log(`\n✓ Generated state for user ${user.email}: ./.auth/${process.env.ENV}_state.json\n`);
 
   await browser.close();
 };

@@ -3,7 +3,7 @@ const env = process.env.ENV || 'stage';
 
 export default defineConfig({
   globalSetup: require.resolve('./support/utils/globalSetup'),
-  timeout: 90_000,
+  timeout: 40_000,
   expect: { timeout: 15_000 },
   testDir: './tests',
   fullyParallel: true,
