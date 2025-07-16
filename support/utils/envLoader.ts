@@ -10,14 +10,15 @@ if (!env) {
 }
 
 const envPath = path.resolve(__dirname, `../../configs/${env}.env`);
-const secretsPath = path.resolve(__dirname,'../../configs/secrets.env');
-const result = dotenv.config({ path: envPath });
-const secretsResult = dotenv.config({ path: secretsPath });
+const secretsPath = path.resolve(__dirname, '../../configs/secrets.env');
 
-if (result.error) {
+const envImport = dotenv.config({ path: envPath });
+const secretsImport = dotenv.config({ path: secretsPath });
+
+if (envImport.error) {
   throw new Error(` ✘ Failed to load .env.${env} file at: ${envPath}`);
 }
-if (secretsResult.error) {
+if (secretsImport.error) {
   throw new Error(` ✘ Failed to load  secrets ${env} file at: ${secretsPath}`);
 }
 

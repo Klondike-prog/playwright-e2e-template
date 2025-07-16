@@ -51,7 +51,6 @@ export default async () => {
   await loginPage.fillAndSubmitLogin(user.email, process.env.password);
   console.log(`\n✓ Create Login state for user: ${user.email}\n`)
 
-
   await page.waitForTimeout(2000);
 
   await context.storageState({ path: `./.auth/${process.env.ENV}_state.json` });
