@@ -15,11 +15,7 @@ export class LoginPage extends BasePage {
     }
 
     async load() {
-        await this.page.goto(`${process.env.baseURL}/auth/login`)
-    }
-    async loadEndpoint(endpoint: string) {
-        const fullURL = `${process.env.baseURL}${endpoint}`;
-        await this.page.goto(fullURL);
+        await this.loadEndpoint(`/auth/login`)
     }
 
     async fillEmail(email: string) {
