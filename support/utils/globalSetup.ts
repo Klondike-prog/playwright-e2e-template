@@ -10,7 +10,7 @@ import { registerUserApi } from '../api/registerUser.api';
 console.log('\n   Global setup starting...\n');
 
 export default async () => {
-  const env = process.env.ENV || 'SATU8602';
+  const env = process.env.ENV || 'stage';
 
   const foldersToClean = [
     path.resolve(__dirname, `../../reporters/junit-report-${env}`),
