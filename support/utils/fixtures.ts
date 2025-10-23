@@ -5,6 +5,7 @@ import Logger from "./logger";
 import FilterComponentSteps from "../steps/FilterSteps";
 import RegisterUserApiSteps from "../steps/RegisterUserApiSteps";
 import { HomePage } from "../pages/HomePage";
+import { BasePage } from "../pages/BasePage";
 
 
 interface CustomOptions {
@@ -15,6 +16,7 @@ interface CustomFixtures {
     loginSteps: LoginSteps;
     filterComponentSteps: FilterComponentSteps;
     registerUserApiSteps: RegisterUserApiSteps
+    basePage: BasePage
     homePage: HomePage
     forEachTest: void;
 }
@@ -42,6 +44,9 @@ export const test = base.extend<CustomFixtures, CustomOptions>({
     },
     homePage: async ({ page }, use) => {
         await use(new HomePage(page));
+    },
+      basePage: async ({ page }, use) => {
+        await use(new BasePage(page));
     },
     filterComponentSteps: async ({ page }, use) => {
         await use(new FilterComponentSteps(page));

@@ -27,5 +27,12 @@ export class BasePage {
         const fullURL = `${process.env.baseURL}${endpoint}`;
         await this.page.goto(fullURL);
     }
+    async visualComparison(screenshotName: string) {
+        await expect(this.page).toHaveScreenshot(screenshotName, {
+            maxDiffPixelRatio: 0.01, // 1% of pixels may differ
+            threshold: 0.1, // minor font rendeering, text smoothing
+        })
+        Logger.passed(`Visual comparison passed for ${screenshotName}`)
+    }
 
 }

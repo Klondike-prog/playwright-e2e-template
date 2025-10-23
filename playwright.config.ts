@@ -10,6 +10,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
+  snapshotPathTemplate: 'baseliine-screenshots/{testFilePath}/{arg}{ext}',
   use: {
     storageState: `.auth/${env}_state.json`,
     baseURL: process.env.baseURL,
