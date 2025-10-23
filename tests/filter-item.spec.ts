@@ -1,5 +1,4 @@
 
-import { base } from "@faker-js/faker";
 import { test } from "../support/utils/fixtures";
 
 test.describe('Test filter items component', () => {
